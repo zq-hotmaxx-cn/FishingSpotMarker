@@ -1,0 +1,63 @@
+# 服务配置
+"server":
+  # 运行模式  prod/dev
+  "mode": "dev"
+  # 服务端口
+  "port": 8080
+  # 日志文件
+  "log": "fishing_spot_marker.log"
+  # JWT 密钥
+  "jwt": "zslt_fishing_spot_marker"
+  # 微信小程序配置
+  "wechat":
+    # 小程序ID
+    "app_id": "wx5f0f5c0c0f0f5c0c"
+    # 小程序密钥
+    "app_secret": "5f0f5c0c0f0f5c0c5f0f5c0c0f0f5c0c"
+
+# 数据库配置
+"database":
+  # 数据库驱动  sqlite/mysql/postgres
+  "driver": "postgres"
+  # 数据源名称
+    # 参考
+      # sqlite "fishing_spot_marker.db"
+      # mysql "fishing_spot_marker:fishing_spot_marker@tcp(localhost:3306)/fishing_spot_marker?charset=utf8mb4&parseTime=True&loc=Local"
+      # postgres "host=localhost port=5432 user=fishing_spot_marker password=fishing_spot_marker dbname=fishing_spot_marker sslmode=disable TimeZone=Asia/Shanghai"
+  "dsn": "host=localhost port=5432 user=fishing_spot_marker password=fishing_spot_marker dbname=fishing_spot_marker sslmode=disable TimeZone=Asia/Shanghai"
+
+# 缓存配置
+"cache":
+  # 缓存方式  memory/redis
+  "method": "memory"
+  # 缓存数据源名称
+    # 参考
+      # memory ""
+      # redis "localhost:6379"
+  "cdsn": ""
+
+# 资源配置
+"resource":
+  # 资源存储方式  local/cos/obs
+  "method": "local"
+  # 资源存储源名称
+  "root": "resource"
+  # 用户数据源
+    # 规则
+    # name + info
+  "user":
+    # 用户数据源名称
+    "name": "users"
+    # 用户信息数据名称  1--用户ID
+    "info": "info/%d.json"
+  # 文件数据源
+    # 规则
+      # name + list
+      # name + data
+  "file":
+    # 文件数据源名称
+    "name": "files"
+    # 文件列表数据名称  1--用户ID
+    "list": "list/%d.json"
+    # 文件数据名称  1--用户ID  2--文件ID  3--文件名
+    "data": "data/%d/%d/%s"
