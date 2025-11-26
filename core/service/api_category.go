@@ -41,3 +41,61 @@ func Post_Api_Category_Service(
 
 	return resp, nil
 }
+
+func Get_Api_Category_List_Service(auth_user user.User) ([]response.Get_Api_Category_List_Response, error) {
+	var resp []response.Get_Api_Category_List_Response
+
+	// 检查用户是否存在
+	exist, err := repository.ExistsUser(auth_user.ID)
+	if err != nil {
+		return nil, err
+	}
+	if !exist {
+		return nil, gorm.ErrRecordNotFound
+	}
+
+	categories, err := repository.FindAllCategoryList()
+	if err != nil {
+		return nil, err
+	}
+
+	resp = make([]response.Get_Api_Category_List_Response, len(categories))
+	for index, category := range categories {
+		resp[index] = response.Get_Api_Category_List_Response{
+			CategoryID: category.ID,
+			Name:       category.Name,
+		}
+	}
+
+	return resp, nil
+}
+
+func Get_Api_Category_Detail_Service(
+	req *request.Get_Api_Category_Detail_Request,
+	auth_user user.User,
+) (*response.Get_Api_Category_Detail_Response, error) {
+	var resp *response.Get_Api_Category_Detail_Response
+
+	// 检查用户是否存在
+	exist, err := repository.ExistsUser(auth_user.ID)
+	if err != nil {
+		return nil, err
+	}
+	if !exist {
+		return nil, gorm.ErrRecordNotFound
+	}
+
+	category, err := repository.FirstCategoryWithID(req.CategoryID)
+	if err != nil {
+		return nil, err
+	}
+
+	resp = &response.Get_Api_Category_Detail_Response{
+		Name:            category.Name,
+		Description:     category.Description,
+		CreatorID:       category.CreatorID,
+		CreatorNickName: category.Creator.NickName,
+	}
+
+	return resp, nil
+}

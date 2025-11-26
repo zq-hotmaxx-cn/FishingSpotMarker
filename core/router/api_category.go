@@ -15,8 +15,8 @@ func loadApiCategoryRouter(r *gin.RouterGroup) {
 		// 创建分类
 		category_router.POST("/", controller.Post_Api_Category)
 		// 获取所有分类列表
-		category_router.GET("/list")
+		category_router.GET("/list", controller.Get_Api_Category_List)
 		// 获取分类详情
-		category_router.GET("/detail")
+		category_router.GET("/detail", controller.Get_Api_Category_Detail)
 	}
 }

@@ -13,10 +13,10 @@ func loadApiUserRouter(r *gin.RouterGroup) {
 		// 修改密码
 		user_router.POST("/password", controller.Get_Default)
 		// 获取用户信息
-		user_router.GET("/info")
+		user_router.GET("/info", controller.Get_Default)
 		// 修改用户信息
 		user_router.POST("/info", controller.Get_Default)
 		// 删除用户
-		user_router.DELETE("/")
+		user_router.DELETE("/", controller.Get_Default)
 	}
 }

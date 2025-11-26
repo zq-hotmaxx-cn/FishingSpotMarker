@@ -111,3 +111,44 @@ func Get_Api_FishingSpot_RectList_Service(
 
 	return resp, nil
 }
+
+func Get_Api_FishingSpot_Detail_Service(
+	req *request.Get_Api_FishingSpot_Detail_Request,
+	auth_user user.User,
+) (*response.Get_Api_FishingSpot_Detail_Response, error) {
+	var resp *response.Get_Api_FishingSpot_Detail_Response
+
+	// 检查用户是否存在
+	exist, err := repository.ExistsUser(auth_user.ID)
+	if err != nil {
+		return nil, err
+	}
+	if !exist {
+		return nil, gorm.ErrRecordNotFound
+	}
+
+	fishing_spot_marker, err := repository.FirstFishingSpotMarkerWithID(req.FishingSpotMarkerID)
+	if err != nil {
+		return nil, err
+	}
+
+	// 获取分类ID列表
+	category_ids := make([]uint, len(fishing_spot_marker.Categories))
+	for index, category := range fishing_spot_marker.Categories {
+		category_ids[index] = category.ID
+	}
+
+	resp = &response.Get_Api_FishingSpot_Detail_Response{
+		Longitude:       fishing_spot_marker.Longitude,
+		Latitude:        fishing_spot_marker.Latitude,
+		CarAccess:       fishing_spot_marker.CarAccess,
+		LocationName:    fishing_spot_marker.LocationName,
+		Location:        fishing_spot_marker.Location,
+		Description:     fishing_spot_marker.Description,
+		CreatorID:       fishing_spot_marker.CreatorID,
+		CreatorNickName: fishing_spot_marker.User.NickName,
+		CategoryIDs:     category_ids,
+	}
+
+	return resp, nil
+}

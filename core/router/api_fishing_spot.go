@@ -19,8 +19,8 @@ func loadApiFishingSpotRouter(r *gin.RouterGroup) {
 		// 获取指定地区钓点列表
 		fishing_spot_router.GET("/area-list", controller.Get_Default)
 		// 获取指定钓点详情
-		fishing_spot_router.GET("/detail")
+		fishing_spot_router.GET("/detail", controller.Get_Api_FishingSpot_Detail)
 		// 获取多个钓点详情
-		fishing_spot_router.GET("/details")
+		fishing_spot_router.GET("/details", controller.Get_Default)
 	}
 }
