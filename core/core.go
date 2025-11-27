@@ -2,6 +2,7 @@ package core
 
 import (
 	"FishingSpotMarker/core/conf"
+	"FishingSpotMarker/core/data"
 	"FishingSpotMarker/core/log"
 	"FishingSpotMarker/core/router"
 	"context"
@@ -19,6 +20,10 @@ func Init() error {
 	}
 
 	if err := log.Init(); err != nil {
+		return err
+	}
+
+	if err := data.Init(); err != nil {
 		return err
 	}
 

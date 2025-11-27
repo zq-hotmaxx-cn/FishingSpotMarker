@@ -25,7 +25,7 @@ type FishingSpotMarker struct {
 	Description string `gorm:"type:varchar(1024); not null" validate:"min=0, max=1024"`
 
 	// 创建者
-	User *User `gorm:"foreignKey:UserID"`
+	User *User `gorm:"foreignKey:CreatorID"`
 	// 分类列表
 	Categories []Category `gorm:"many2many:fishing_spot_marker_categories;"`
 }

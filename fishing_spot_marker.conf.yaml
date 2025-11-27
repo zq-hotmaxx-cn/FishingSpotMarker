@@ -18,13 +18,13 @@
 # 数据库配置
 "database":
   # 数据库驱动  sqlite/mysql/postgres
-  "driver": "postgres"
+  "driver": "mysql"
   # 数据源名称
     # 参考
       # sqlite "fishing_spot_marker.db"
-      # mysql "fishing_spot_marker:fishing_spot_marker@tcp(localhost:3306)/fishing_spot_marker?charset=utf8mb4&parseTime=True&loc=Local"
-      # postgres "host=localhost port=5432 user=fishing_spot_marker password=fishing_spot_marker dbname=fishing_spot_marker sslmode=disable TimeZone=Asia/Shanghai"
-  "dsn": "host=localhost port=5432 user=fishing_spot_marker password=fishing_spot_marker dbname=fishing_spot_marker sslmode=disable TimeZone=Asia/Shanghai"
+      # mysql "fishing_spot_marker:password@tcp(localhost:3306)/fishing_spot_marker?charset=utf8mb4&parseTime=True&loc=Local"
+      # postgres "postgresql://fish:fish@localhost:5432/fish?sslmode=disable&TimeZone=Asia/Shanghai"
+  "dsn": "fishing_spot_marker:password@tcp(localhost:3306)/fishing_spot_marker?charset=utf8mb4&parseTime=True&loc=Local"
 
 # 缓存配置
 "cache":

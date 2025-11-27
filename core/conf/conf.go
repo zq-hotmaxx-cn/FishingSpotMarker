@@ -15,7 +15,7 @@ var (
 
 // 初始化
 func Init() error {
-	return config.InitViperConfig(func() {
+	err := config.InitViperConfig(func() {
 		// 加载配置
 		viper_config, err := config.LoadViperConfig()
 		if err != nil {
@@ -28,6 +28,20 @@ func Init() error {
 
 		fishing_spot_marker_viper_config = viper_config
 	})
+
+	// 加载配置
+	viper_config, err := config.LoadViperConfig()
+	if err != nil {
+		return err
+	}
+
+	// 并发安全
+	fishing_spot_marker_viper_config_lock.Lock()
+	defer fishing_spot_marker_viper_config_lock.Unlock()
+
+	fishing_spot_marker_viper_config = viper_config
+
+	return err
 }
 
 // 获取配置
