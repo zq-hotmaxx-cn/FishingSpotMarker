@@ -45,13 +45,13 @@ func Auth() gin.HandlerFunc {
 func auth(token string) (user.User, error) {
 	if token == "" {
 		return user.User{
-			ID:       0,
+			ID:       1,
 			Platform: user.PLATFORM_UNKNOWN,
 		}, nil
 	}
 
 	return user.User{
-		ID:       0,
+		ID:       1,
 		Platform: user.PLATFORM_UNKNOWN,
 	}, nil
 }
